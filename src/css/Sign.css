@@ -1,31 +1,47 @@
-.signup-container {
+.signForm {
   font-family: 'Freesentation-9Black';
   display: flex;
   flex-direction: column;
   margin: auto;
   width: 80%;
-  gap: 10px;
+  gap: 5px;
 }
-.signup-container p {
+
+.signup-container p:nth-child(1) {
+  font-family: 'EliceDigitalBaeum-Bd';
   font-size: 30px;
-  text-align: center;
-}
-.signup-container span {
-  font-size: 20px;
   text-align: center;
   margin-bottom: 15px;
 }
-.signup-container input {
+
+.signup-container p:nth-child(2) {
+  font-family: 'EliceDigitalBaeum-Bd';
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: gray;
+}
+.signForm p {
+  font-family: 'EliceDigitalBaeum-Bd';
+  color: red;
+  margin: 5px 0 0 0; 
+  font-size: 12px; 
+}
+
+
+.signForm input {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.signup-container label {
-  margin-top: 10px;
+.signForm label {
+  margin-top: 15px;
 }
 
-.signup-container button {
-  padding: 8px;
+.signForm button {
+  font-family: 'Freesentation-9Black';
+  font-size: 20px;
+  padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -33,6 +49,6 @@
   cursor: pointer;
 }
 
-.signup-container button:hover {
+.signForm button:hover {
   background-color: #0056b3;
 }
