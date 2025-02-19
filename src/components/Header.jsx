@@ -10,7 +10,7 @@ function Header() {
   const navigate = useNavigate();
 
   const goToSign = () => {
-    navigate("/signup")
+    navigate("/membersignup")
   }
 
   return (
