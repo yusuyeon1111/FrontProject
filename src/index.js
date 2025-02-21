@@ -8,6 +8,7 @@ import Login from './components/Login';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import reportWebVitals from './reportWebVitals';
 import MemberSignUp from './components/MemberSignUp';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter basename = {process.env.PUBLIC_URL}>

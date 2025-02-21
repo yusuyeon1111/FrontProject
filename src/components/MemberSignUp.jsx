@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../css/Sign.css'
 import { useForm } from 'react-hook-form'
+import axios from 'axios';
 function MemberSignUp() {
   const {
     register,
@@ -9,8 +10,17 @@ function MemberSignUp() {
     formState:{errors},
   }= useForm();
 
-  const onsubmit = (data) => {
-    console.log(data)
+  const onsubmit = async (data) => {
+    try {
+        const response = await axios.post("/api/member/signup", data, {
+          headers: { "Content-Type": "application/json" }, 
+        });
+        console.log("회원가입 성공:", response.data);
+        alert("회원가입이 완료되었습니다!");
+      } catch (error) {
+        console.error("회원가입 오류:", error);
+        alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      }
   }
 
   const password = watch("password");

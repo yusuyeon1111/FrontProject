@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import useLocation from "../hooks/useLocation";
 import { MdGpsFixed } from "react-icons/md";
 import "../css/Map.css"; // CSS 파일 불러오기
-
+import homePin from '../assets/homePin.png'
 function KakaoMap() {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -21,7 +21,15 @@ function KakaoMap() {
       mapRef.current = map;
 
       const markerPosition = new kakao.maps.LatLng(location.latitude, location.longitude);
-      const marker = new kakao.maps.Marker({ position: markerPosition });
+      const markerImage = new kakao.maps.MarkerImage(
+        homePin,
+        new kakao.maps.Size(30, 30),
+        {offset: new kakao.maps.Point(20, 40)}
+      )
+      const marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image:markerImage
+        });
       marker.setMap(map);
       markerRef.current = marker;
 
