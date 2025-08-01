@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import Login from './components/Login';
+import OAuth2Success from './components/OAuth2Success';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import reportWebVitals from './reportWebVitals';
 import MemberSignUp from './components/MemberSignUp';
+import MyPage from './components/MyPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,8 @@ root.render(
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/membersignup" element={<MemberSignUp/>}/>
+      <Route path="/myPage" element={<MyPage/>}/>
+      <Route path="/oauth2/success" element={<OAuth2Success/>}/>
     </Routes>
   </BrowserRouter>
 );

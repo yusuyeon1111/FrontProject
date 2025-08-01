@@ -1,110 +1,82 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import '../css/Sign.css';
+import axios from 'axios';
+import { useForm } from 'react-hook-form'
+import kakaoLogo from '../assets/kakao_login_medium_narrow.png'
+import naverLogo from '../assets/naver.png'
+function Signin() {
+  const nav = useNavigate();
+  const {
+      register,
+      handleSubmit,
+      watch,
+      formState:{errors},
+    }= useForm();
 
-function Copyright(props) {
+  const onsubmit = async (data) => {
+    try {
+        const response = await axios.post("/api/member/signin", data, {
+          headers: { "Content-Type": "application/json" }, 
+        });
+        console.log("로그인 성공:", response.data);
+        localStorage.setItem("accesToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        alert("로그인이 완료되었습니다!");
+        nav("/");
+      } catch (error) {
+        console.error("로그인 오류:", error);
+        alert("로그인에 실패했습니다. 다시 시도해주세요.");
+      }
+  }
+  const password = watch("password");
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <div className='signup-container'>
+      <p>로그인</p>
+      <form className='signForm' onSubmit={handleSubmit(onsubmit)}>
+      <label htmlFor='username'>아이디</label>
+        <input {...register("username",{required:"아이디를 입력해주세요"})} />
+        {errors.loginId && <p>{errors.loginId.message}</p>}
+
+        <label htmlFor='password'>비밀번호</label>
+        <input
+        type="password"
+        {...register("password", {
+          required: "비밀번호를 입력해주세요",
+          minLength: { value: 6, message: "6자 이상 입력해주세요!" },
+        })}
+        />
+        {errors.password && <p>{errors.password.message}</p>}
+
+        <button style={{marginTop:30}} type='submit'>로그인</button>
+        </form>
+        <div className='signin-container'>
+          <Link to='/membersignup' className="custom-link">회원가입</Link>
+          <Link className="custom-link">아이디 찾기</Link>
+          <Link className="custom-link">비밀번호 찾기</Link>
+        </div>
+        <div className='oauthLogin'>
+          <img
+            src={kakaoLogo}
+            alt="카카오 로그인"
+            style={{ cursor: 'pointer' , width:'180px'}}
+            onClick={() => {
+              window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
+            }}
+          />
+           <img
+            src={naverLogo}
+            alt="네이버 로그인"
+            style={{ cursor: 'pointer' , width:'180px'}}
+            onClick={() => {
+              window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+            }}
+          />
+        </div>
+
+        
+    </div>
   );
 }
 
-const theme = createTheme();
-
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
-  );
-}
+export default Signin;

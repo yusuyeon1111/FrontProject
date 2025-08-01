@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../css/Sign.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 function MemberSignUp() {
   const {
     register,
@@ -43,12 +44,12 @@ function MemberSignUp() {
     <p>회원가입</p>
     <p>회원정보를 입력해주세요.</p>
     <form className='signForm' onSubmit={handleSubmit(onsubmit)}>
-        <label htmlFor='name'>이름</label>
-        <input {...register("name",{required:"이름을 입력해주세요"})} />
+        <label htmlFor='nickname'>이름</label>
+        <input {...register("nickname",{required:"이름을 입력해주세요"})} />
         {errors.name && <p>{errors.name.message}</p>}
 
-        <label htmlFor='loginId'>아이디</label>
-        <input {...register("loginId",{required:"이름을 입력해주세요"})} />
+        <label htmlFor='username'>아이디</label>
+        <input {...register("username",{required:"아이디를 입력해주세요"})} />
         {errors.loginId && <p>{errors.loginId.message}</p>}
 
         <label htmlFor='email'>이메일</label>
@@ -79,6 +80,7 @@ function MemberSignUp() {
         
         <button style={{marginTop:30}} type='submit'>회원가입</button>
         </form>
+        
   </div>
   )
 }
