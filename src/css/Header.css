@@ -1,64 +1,74 @@
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding : 5px;
-    background-color: lightsalmon;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: #DADDE3; /* 연회색 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 100;
+  height: 30px;
 }
+
 .logo-container {
-    margin-left: 10px;
-    display: flex;
-    flex-direction: row; 
-    align-items: center; 
-  }
-  
-  .member-container {
-    display: flex;
-    cursor: pointer;
-  }
-#logo {
-    font-size: 25px;
-    font-family: 'TTTogether';
-    color: crimson;
-    margin-right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+
+.member-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+#logo {
+  font-size: 26px;
+  font-family: 'TTTogether', sans-serif;
+  color: #3A3A3A;   /* 기존보다 부드럽게 */
+  font-weight: 600;
+}
+
 #logoex {
-    font-size: 20px;
-    font-family: 'EliceDigitalBaeum-Bd';
-    color: white;
+  font-size: 18px;
+  font-family: 'EliceDigitalBaeum-Bd', sans-serif;
+  color: #777;
 }
 
 #userIcon {
-    font-size: 30px;
-    padding: 10px;
-    color: white;
+  font-size: 32px;
+  padding: 8px;
+  color: #4A4A4A;  /* 좀 더 부드러운 톤 */
 }
 
 #bookmark {
-    color: crimson;
-    font-size: 25px;
+  color: #4A4A4A;
+  font-size: 28px;
 }
 
 .menu-container {
   position: absolute;
-  top: 60px; /* 아이콘 바로 아래에 위치하도록 조정 */
+  top: 57px;
   right: 10px;
   background-color: white;
   border: 1px solid #ccc;
-  padding: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 12px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   z-index: 999;
+  min-width: 140px;
+  text-align: center;
 }
 
 .menu-container p {
   margin: 0;
-  padding: 8px 0;
+  padding: 10px 0;
   cursor: pointer;
-  transition: 0.2s;
+  transition: color 0.2s ease, font-weight 0.2s ease;
 }
 
 .menu-container p:hover {
-  color: #007bff;
-  font-weight: bold;
+  color: #6D6DFF;
+  font-weight: 600;
 }

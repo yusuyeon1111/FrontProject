@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
 import OAuth2Success from './components/OAuth2Success';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import reportWebVitals from './reportWebVitals';
@@ -16,7 +15,6 @@ root.render(
     <Routes>
       <Route path="/" element={<App/>}/>
       <Route path="/signin" element={<SignIn/>}/>
-      <Route path="/signup" element={<SignUp/>}/>
       <Route path="/membersignup" element={<MemberSignUp/>}/>
       <Route path="/myPage" element={<MyPage/>}/>
       <Route path="/oauth2/success" element={<OAuth2Success/>}/>

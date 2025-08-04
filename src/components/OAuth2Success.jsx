@@ -1,10 +1,34 @@
-// pages/OAuth2Success.jsx
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import axios from 'axios';
 const OAuth2Success = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
+   const onsubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = {
+      nickname: formData.get('nickname'),
+      preferredPosition: formData.get('preferredPosition'),
+    };
+
+    if (!data.nickname) {
+      alert("닉네임을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("/api/member/update", data, {
+        headers: { "Content-Type": "application/json" },
+      });
+      alert("정보 등록이 완료되었습니다!");
+      navigate("/"); 
+    } catch (error) {
+      console.error("업데이트 오류:", error);
+      alert("정보 등록에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
@@ -14,14 +38,30 @@ const OAuth2Success = () => {
     localStorage.setItem("refreshToken", refreshToken);
     if (accessToken && refreshToken) {
       alert("로그인 완료!");
-      navigate("/"); // 홈으로 리다이렉트
     } else {
       alert("로그인 실패");
       navigate("/signin");
     }
   }, [location, navigate]);
 
-  return <p>로그인 중입니다...</p>;
+  return(
+    <div className="auth-container">
+      <h2>추가 정보 등록</h2>
+      <form className="auth-form" onSubmit={()=>onsubmit}>
+        <label htmlFor='nickname'>닉네임</label>
+        <input id='nickname' name='nickname'/>
+        <label htmlFor='preferredPosition'>희망 포지션</label>
+        <select id='preferredPosition' name='preferredPosition'>
+          <option value='backend'>BACKEND</option>
+          <option value='frontend'>FRONTEND</option>
+          <option value='pm'>기획</option>
+          <option value='design'>디자인</option>
+          <option value='etc'>기타</option>
+        </select>
+        <button type='submit'>등록</button>
+       </form>
+    </div>
+  );
 };
 
 export default OAuth2Success;

@@ -1,78 +1,194 @@
-.signForm {
-  font-family: 'Freesentation-9Black';
+/* ==========================
+   공통 스타일
+========================== */
+.auth-container {
   display: flex;
   flex-direction: column;
-  margin: auto;
-  width: 80%;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 40px 20px;
 }
 
-.signup-container p:nth-child(1) {
-  font-family: 'EliceDigitalBaeum-Bd';
-  font-size: 30px;
-  text-align: center;
-  margin-bottom: 15px;
+.auth-container h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
 }
 
-.signup-container p:nth-child(2) {
-  font-family: 'EliceDigitalBaeum-Bd';
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 15px;
-  color: gray;
-}
-.signForm p {
-  font-family: 'EliceDigitalBaeum-Bd';
-  color: red;
-  margin: 5px 0 0 0; 
-  font-size: 12px; 
+.auth-container p.subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
 }
 
+/* ==========================
+   폼 공통
+========================== */
+.auth-form {
+  width: 100%;
+  max-width: 420px;
+  background-color: #fff;
+  padding: 32px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-.signForm input {
-  padding: 8px;
+.auth-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.auth-form input {
+  padding: 12px;
+  font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.signForm label {
-  margin-top: 15px;
+  border-radius: 8px;
+  transition: border-color 0.2s;
 }
 
-.signForm button {
-  font-family: 'Freesentation-9Black';
-  font-size: 20px;
-  padding: 10px;
+.auth-form select {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.auth-form select > {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.auth-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* 에러 메시지 */
+.auth-form .error {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: -10px;
+  margin-bottom: 4px;
+}
+
+/* 버튼 */
+.auth-form button {
+  margin-top: 14px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.signForm button:hover {
+.auth-form button:hover {
   background-color: #0056b3;
 }
 
-.signin-container {
+/* ==========================
+   링크 / 기타
+========================== */
+.auth-links {
   display: flex;
-  justify-content: center; /* 가로 가운데 정렬 */
-  gap: 20px;               /* 링크 사이 간격 */
+  justify-content: center;
+  gap: 16px;
   margin-top: 20px;
 }
 
-.custom-link {
-  text-decoration: none; /* 기존 밑줄 제거 */
-  border-bottom: 1px solid white; /* 밑줄처럼 보이게 */
-  padding-bottom: 2px; /* 밑줄과 글자 사이 간격 */
-  transition: border-color 0.3s;
-  color: black;
+.auth-links a {
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
 }
 
-.custom-link:hover {
-  border-bottom-color: #0056b3;
+.auth-links a:hover {
+  border-bottom-color: #007bff;
+  color: #007bff;
+}
+
+/* ==========================
+   소셜 로그인 버튼
+========================== */
+.oauth-buttons {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+}
+
+.kakao-login {
+  background-color: #fee500;
+  color: #3c1e1e;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
+  width: 160px;
 }
 
-.oauthLogin {
-  margin-top: 10px;
+.naver-login {
+  background-color: #03c75a;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 160px;
+}
+
+.input-button-group {
+  display: flex;
+  gap: 8px; /* input과 버튼 사이 간격 */
+  align-items: center; /* 수직 중앙 정렬 */
+}
+
+.input-button-group input {
+  flex: 1; /* 가능한 가로 공간 모두 차지 */
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.input-button-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.input-button-group button {
+  width: 110px; /* 필요에 따라 조절 */
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: -0.1px;
+}
+
+.input-button-group button:hover {
+  background-color: #0056b3;
 }

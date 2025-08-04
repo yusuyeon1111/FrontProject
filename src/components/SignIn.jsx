@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../css/Sign.css';
 import axios from 'axios';
 import { useForm } from 'react-hook-form'
-import kakaoLogo from '../assets/kakao_login_medium_narrow.png'
+import kakaoLogo from '../assets/kakaoLogo.png'
 import naverLogo from '../assets/naver.png'
 function Signin() {
   const nav = useNavigate();
@@ -29,53 +29,43 @@ function Signin() {
         alert("로그인에 실패했습니다. 다시 시도해주세요.");
       }
   }
+
   const password = watch("password");
   return (
-    <div className='signup-container'>
-      <p>로그인</p>
-      <form className='signForm' onSubmit={handleSubmit(onsubmit)}>
-      <label htmlFor='username'>아이디</label>
-        <input {...register("username",{required:"아이디를 입력해주세요"})} />
-        {errors.loginId && <p>{errors.loginId.message}</p>}
-
-        <label htmlFor='password'>비밀번호</label>
+     <div className="auth-container">
+      <h2>로그인</h2>
+      <form className="auth-form" onSubmit={handleSubmit(onsubmit)} noValidate>
+        <label htmlFor="username">아이디</label>
         <input
-        type="password"
-        {...register("password", {
-          required: "비밀번호를 입력해주세요",
-          minLength: { value: 6, message: "6자 이상 입력해주세요!" },
-        })}
+          id="username"
+          type="text"
+          {...register('username', { required: '아이디를 입력해주세요' })}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.username && <p className="error">{errors.username.message}</p>}
 
-        <button style={{marginTop:30}} type='submit'>로그인</button>
-        </form>
-        <div className='signin-container'>
-          <Link to='/membersignup' className="custom-link">회원가입</Link>
-          <Link className="custom-link">아이디 찾기</Link>
-          <Link className="custom-link">비밀번호 찾기</Link>
-        </div>
-        <div className='oauthLogin'>
-          <img
-            src={kakaoLogo}
-            alt="카카오 로그인"
-            style={{ cursor: 'pointer' , width:'180px'}}
-            onClick={() => {
-              window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
-            }}
-          />
-           <img
-            src={naverLogo}
-            alt="네이버 로그인"
-            style={{ cursor: 'pointer' , width:'180px'}}
-            onClick={() => {
-              window.location.href = "http://localhost:8080/oauth2/authorization/naver";
-            }}
-          />
-        </div>
+        <label htmlFor="password">비밀번호</label>
+        <input
+          id="password"
+          type="password"
+          {...register('password', { required: '비밀번호를 입력해주세요' })}
+        />
+        {errors.password && <p className="error">{errors.password.message}</p>}
 
-        
+        <button type="submit">로그인</button>
+      </form>
+
+      <div className="auth-links">
+        <a href="/signup">회원가입</a>
+        <a href="/find-id">아이디 찾기</a>
+        <a href="/find-pw">비밀번호 찾기</a>
+      </div>
+
+      <div className="oauth-buttons">
+        <button className="kakao-login" onClick={()=>{window.location.href = "http://localhost:8080/oauth2/authorization/kakao";}}>카카오 로그인</button>
+        <button className="naver-login" onClick={()=>{window.location.href = "http://localhost:8080/oauth2/authorization/naver";}}>네이버 로그인</button>
+      </div>
     </div>
+
   );
 }
 

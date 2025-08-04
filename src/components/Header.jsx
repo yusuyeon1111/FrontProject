@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Login from './Login';
 import SignIn from './SignIn';
 import '../css/Header.css'
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +35,7 @@ function Header() {
     <div className='header-container'> 
       <div className='logo-container'>
         <IoBookmark id='bookmark'/>
-        <span id='logo'>팀해요</span>
+        <span id='logo' onClick={()=>navigate("/")}>팀해요</span>
       </div>
       <div className='member-container'>
          <FaUserCircle onClick={toggleMenu} id='userIcon'/>

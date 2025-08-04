@@ -1,0 +1,204 @@
+.mypage-container {
+  background-color: #fff;
+  border-radius: 20px;
+  font-family: 'Pretendard', sans-serif;
+  color: #333;
+}
+
+.top {
+  font-size: 28px;
+  font-weight: bold;
+  color: #FF6B81;
+  margin-bottom: 30px;
+}
+
+/* 전체 Tabs 스타일 */
+.MuiTabs-root {
+  border-radius: 12px 12px 0 0;
+  padding: 6px 16px;
+}
+
+/* 탭 개별 항목 기본 상태 */
+.MuiTab-root {
+  color: #888;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'EliceDigitalBaeum-Bd', sans-serif;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+/* 선택된 탭 항목 */
+.Mui-selected {
+  color: #ff6b81 !important; /* 핑크톤 강조 */
+  font-weight: 700;
+}
+
+/* 밑줄 스타일 (선택된 탭 아래에 있는 선) */
+.MuiTabs-indicator {
+  background-color: #ff6b81 !important;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.myInfo-container {
+  margin: 40px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.myInfo-container {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 6px 16px rgba(255, 182, 185, 0.25);
+  margin-bottom: 24px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.nickname {
+  font-size: 24px;
+  font-weight: bold;
+  color: #B07BAC;
+  font-family: 'EliceDigitalBaeum-Bd', sans-serif;
+}
+
+.role-badge {
+  background-color: #B07BAC;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.intro-text {
+  background-color: #fdf1f2;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #4c4c4c;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}.mypage-container {
+  background-color: #fff;
+  border-radius: 20px;
+  font-family: 'Pretendard', sans-serif;
+  color: #2C2C2C;
+}
+
+.top {
+  font-size: 28px;
+  font-weight: bold;
+  color: #5D5FEF;
+  margin-bottom: 30px;
+}
+
+.MuiTabs-root {
+  border-radius: 12px 12px 0 0;
+  padding: 6px 16px;
+  background-color: #F5F6FA;
+}
+
+.MuiTab-root {
+  color: #777;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'Pretendard', sans-serif;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.Mui-selected {
+  color: #5D5FEF !important;
+  font-weight: 700;
+}
+
+.MuiTabs-indicator {
+  background-color: #5D5FEF !important;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.myInfo-container {
+  margin: 40px;
+  padding: 24px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.nickname {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3E3A61;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.role-badge {
+  background-color: #3E3A61;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.intro-text {
+  background-color: #F4F5F7;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #4C4C4C;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.myStack-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stack-pill {
+  background-color: #EEF0F4;
+  color: #3E3A61;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+.myStack-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stack-pill {
+  background-color: #E6E8EB;
+  color: #444;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+
+
