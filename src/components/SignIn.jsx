@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import kakaoLogo from '../assets/kakaoLogo.png'
 import naverLogo from '../assets/naver.png'
 function Signin() {
+
   const nav = useNavigate();
   const {
       register,
@@ -15,13 +16,14 @@ function Signin() {
     }= useForm();
 
   const onsubmit = async (data) => {
+    const username = watch("username");
     try {
         const response = await axios.post("/api/member/signin", data, {
           headers: { "Content-Type": "application/json" }, 
         });
-        console.log("로그인 성공:", response.data);
-        localStorage.setItem("accesToken", response.data.accessToken);
+        localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
+        localStorage.setItem("username",username)
         alert("로그인이 완료되었습니다!");
         nav("/");
       } catch (error) {
@@ -30,7 +32,6 @@ function Signin() {
       }
   }
 
-  const password = watch("password");
   return (
      <div className="auth-container">
       <h2>로그인</h2>

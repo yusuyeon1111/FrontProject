@@ -1,0 +1,128 @@
+/* 전체 폼 컨테이너 */
+.form-container {
+  padding: 40px 150px;
+  background-color: ghostwhite;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 70%;
+  max-width: 1000px;
+  background-color: white;
+  padding: 70px 150px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.form-top {
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 라벨 + 타이틀 */
+.label {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* 공통 input */
+.input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* 작은 input (숫자용) */
+.input.small {
+  width: 30%;
+}
+
+/* 공통 select */
+.select {
+  width: 51%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+/* 한 줄짜리 라벨+입력 UI */
+.row {
+width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* 설명 에디터 영역 */
+.editor-wrapper {
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.editor-buttons {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  background: #f8f8f8;
+  border-top: 1px solid #ddd;
+}
+
+/* 버튼 스타일 */
+button {
+  padding: 8px 8px;
+  font-size: 16px;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+   color: #5D5FEF;
+}
+
+/* 스택 섹션 */
+.stack-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stack-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* 설명 보조 텍스트 */
+.sub {
+  font-size: 0.9rem;
+  color: #555;
+}
+.memberLabel .row{
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.project-type-row {
+  display: flex;
+  gap: 2%;
+}
+
+.project-type-row .select {
+  width: 49%;
+}

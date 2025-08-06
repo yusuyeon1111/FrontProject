@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SignIn from './SignIn';
 import '../css/Header.css'
 import { useNavigate } from 'react-router-dom';
 import { FaUserCircle} from "react-icons/fa";
 import { IoBookmark } from "react-icons/io5";
 import axios from 'axios';
+import { MdEdit } from "react-icons/md";
+import { FaBell } from "react-icons/fa6";
 
 function Header() {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
- const accessToken = localStorage.getItem("accessToken")
+  const [accessToken, setAccessToken] = useState("");
+  useEffect(()=>{
+    setAccessToken(localStorage.getItem("accessToken"));
+  }, [])
  
   const toggleMenu = () => {
       setShowMenu(prev => !prev);
@@ -38,6 +43,9 @@ function Header() {
         <span id='logo' onClick={()=>navigate("/")}>팀해요</span>
       </div>
       <div className='member-container'>
+         <FaBell className='memberIcon'/>
+         <MdEdit className='memberIcon' onClick={() => navigate("/postform")}/>
+         <span id='line'>|</span>
          <FaUserCircle onClick={toggleMenu} id='userIcon'/>
         
         {showMenu && (

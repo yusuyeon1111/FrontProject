@@ -8,15 +8,23 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 import reportWebVitals from './reportWebVitals';
 import MemberSignUp from './components/MemberSignUp';
 import MyPage from './components/MyPage';
+import Post from './components/Post';
+import Layout from './components/Layout';
+import Main from './components/Main';
+import PostForm from './components/PostForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter basename = {process.env.PUBLIC_URL}>
     <Routes>
-      <Route path="/" element={<App/>}/>
+      <Route element={<Layout/>}>
+        <Route path="/" element={<Main/>}/>
+        <Route path="/myPage" element={<MyPage/>}/>
+        <Route path='/post' element={<Post/>}/>
+        <Route path='/postform' element={<PostForm/>}/>
+      </Route>
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/membersignup" element={<MemberSignUp/>}/>
-      <Route path="/myPage" element={<MyPage/>}/>
       <Route path="/oauth2/success" element={<OAuth2Success/>}/>
     </Routes>
   </BrowserRouter>

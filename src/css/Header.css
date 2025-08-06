@@ -72,3 +72,15 @@
   color: #6D6DFF;
   font-weight: 600;
 }
+
+.memberIcon {
+  font-size: 27px;
+  padding: 8px;
+  color: #4A4A4A;
+}
+
+#line {
+  color: #9b9a9a;
+  font-size: 20px;
+  margin-bottom: 5px;
+}

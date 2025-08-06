@@ -192,3 +192,32 @@
 .input-button-group button:hover {
   background-color: #0056b3;
 }
+
+.stack-container .input-button-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+
+.stack-container .input-button-group button {
+  width: 40px;          /* + 버튼을 정사각형으로 작게 */
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  font-size: 24px;      /* + 모양이 잘 보이도록 */
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.stack-container .input-button-group button:hover {
+  background-color: #0056b3;
+}
+
+

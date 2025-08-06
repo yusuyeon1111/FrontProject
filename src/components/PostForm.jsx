@@ -1,0 +1,245 @@
+import React, { useState, useRef } from 'react';
+import { TextField, Button, Box, MenuItem, Chip, Stack } from '@mui/material';
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import '../css/PostForm.css'
+const regions = [
+  '서울특별시','부산광역시','대구광역시','인천광역시','광주광역시','대전광역시','울산광역시','세종특별자치시','경기도',
+  '강원도','충청북도','충청남도','전라북도','전라남도','경상북도','경상남도','제주특별자치도',
+];
+const roleOptions = ['프론트엔드', '백엔드', '디자이너', '기획자'];
+const initialContents = [
+  "## 1. 프로젝트 개요 \n",
+  " ### 1-1. 프로젝트 소개 ",
+  " - 간단하게 우리 프로젝트가 무엇인지 설명해 주세요.",
+  " - 예) “온라인 스터디 매칭 플랫폼을 개발하는 프로젝트입니다. \n",
+  " ### 1-2. 주제 ",
+  " - 프로젝트의 핵심 주제를 한 문장으로 적어 주세요.",
+  " - 예) “효율적인 스터디 그룹을 연결해주는 서비스” \n",
+  " ### 1-3. 목표 ",
+  " - 이번 프로젝트를 통해 이루고 싶은 목표를 적어 주세요.",
+  " - 예) “포트폴리오용 MVP 완성” \n",
+  "## 2. 진행 방식 및 일정",
+  " - 프로젝트 진행 방법과 주요 일정을 알려 주세요.",
+  " - 예) “주 1회 온라인 미팅, 8월 10일부터 10월 말까지 진행” \n",
+  "## 3. 지원 자격",
+  " - 함께 일할 팀원에게 기대하는 조건이나 필요한 기술을 적어 주세요. ",
+  " - 예) “Git 사용 가능자, 소통 잘하는 분, 협업 경험자 우대” \n",
+  "## 4. 기대할 수 있는 점",
+  " - 이 프로젝트에 참여하면 어떤 경험과 이점이 있을지 알려 주세요.",
+  " - 예) “실전 협업 경험, 배포 가능한 포트폴리오, 기술면접 대비” \n",
+].join('\n');
+
+const refreshContents = [
+  "## 1. 프로젝트 개요",
+  " ### 1-1. 프로젝트 소개 ",
+ " - ",
+  " ### 1-2. 주제 ",
+  " - ",
+  " ### 1-3. 목표 ",
+  " - ",
+  "## 2. 진행 방식 및 일정",
+  " - ",
+  "## 3. 지원 자격",
+  " - ",
+  "## 4. 기대할 수 있는 점",
+  " - ",
+].join('\n');
+
+function PostForm() {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [roles, setRoles] = useState([]);
+  const [techInput, setTechInput] = useState('');
+  const [techList, setTechList] = useState([]);
+  const [recruitCount, setRecruitCount] = useState(1);
+  const [period, setPeriod] = useState('');
+  const editorRef = useRef();
+  const [refresh, setRefresh] = useState(false);
+  const [stackInput, setStackInput] = useState("");
+  const [stackList, setStackList] = useState([]);
+  const [type, setType] = useState('');
+  const [region, setRegion] = useState('');
+  const [positions, setPositions] = useState([
+    { id: Date.now(), role: "backend", count: 1 },
+  ]);
+
+
+  const handleClick = () => {
+    const markdown = editorRef.current.getInstance().getMarkdown();
+    alert(markdown);
+  };
+
+  const handleAddTech = () => {
+    const trimmed = techInput.trim();
+    if (trimmed && !techList.includes(trimmed)) {
+      setTechList([...techList, trimmed]);
+      setTechInput('');
+    }
+  };
+
+  const handleDeleteTech = (tech) => {
+    setTechList(techList.filter((t) => t !== tech));
+  };
+
+  const handleSubmit = () => {
+    const postData = {
+      title,
+      content,
+      roles,
+      techList,
+      recruitCount,
+      period,
+    };
+    console.log(postData);
+    // TODO: axios.post('/api/post', postData)
+  };
+
+  const handleRefresh = (e) => {
+    e.preventDefault();
+    editorRef.current.getInstance().setMarkdown(refreshContents);
+  };
+
+  const handleAddStack = () => {
+    const trimmed = stackInput.trim();
+    if (trimmed && !stackList.includes(trimmed)) {
+      setStackList([...stackList, trimmed]);
+      setStackInput("");
+    }
+  };
+
+  const handleDeleteStack = (stackToDelete) => {
+    setStackList(stackList.filter((stack) => stack !== stackToDelete));
+  };
+
+   const handleAdd = () => {
+    setPositions([
+      ...positions,
+      { id: Date.now(), role: "backend", count: 1 },
+    ]);
+  };
+
+  const handleRemove = (id) => {
+    setPositions(positions.filter((pos) => pos.id !== id));
+  };
+
+  const handleChange = (id, field, value) => {
+    setPositions(
+      positions.map((pos) =>
+        pos.id === id ? { ...pos, [field]: value } : pos
+      )
+    );
+  };
+
+  return (
+   <div className="form-container">
+      <form className="form">
+        <div className='form-top'>
+        <label>
+          <span className="label">프로젝트명</span>
+          <input name="title" className="input" />
+        </label>
+        <div>
+          <span className="label">프로젝트 방식</span>
+            <div className="project-type-row">
+              <select
+                name="projectType"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+                className="select"
+              >
+                <option value="online">온라인</option>
+                <option value="offline">오프라인</option>
+                <option value="both">온라인/오프라인</option>
+              </select>
+              <select
+                name="region"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className="select"
+              >
+                <option value="nothing">상관없음</option>
+                {type !== 'online' && regions.map((r) => <option key={r}>{r}</option>)}
+              </select>
+            </div>
+          </div>
+        <div className='memberLabel'>
+        <span className="label">모집인원</span>
+         {positions.map((pos) => (
+            <label className="row" key={pos.id}>
+              <select
+                name="position"
+                className="select"
+                value={pos.role}
+                onChange={(e) => handleChange(pos.id, "role", e.target.value)}
+              >
+                <option value="backend">BACKEND</option>
+                <option value="frontend">FRONTEND</option>
+                <option value="pm">기획</option>
+                <option value="design">디자인</option>
+                <option value="etc">기타</option>
+              </select>
+              <input
+                type="number"
+                className="input small"
+                min="1"
+                value={pos.count}
+                onChange={(e) => handleChange(pos.id, "count", e.target.value)}
+              />
+              <button type="button" onClick={handleAdd}>
+                추가
+              </button>
+              {positions.length > 1 && (
+                <button type="button" onClick={() => handleRemove(pos.id)}>
+                  삭제
+                </button>
+              )}
+            </label>
+          ))}
+        </div>
+        <div className="stack-section">
+          <span className="label">사용 스택</span>
+          <span className="sub">- 프론트엔드, 백엔드, 협업 도구 등 어떤 기술과 도구를 사용할 계획인지 적어 주세요.</span>
+          <div className="stack-input">
+            <TextField
+              variant="outlined"
+              size="small"
+              value={stackInput}
+              onChange={(e) => setStackInput(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleAddStack();
+                }
+              }}
+              sx={{ flex: 1 }}
+            />
+            <button type="button" onClick={handleAddStack} style={{fontSize:'30px'}}>+</button>
+          </div>
+          <Stack direction="row" spacing={1} flexWrap="wrap" mt={2}>
+            {stackList.map((stack, i) => (
+              <Chip key={i} label={stack} onDelete={() => handleDeleteStack(stack)} color="primary" />
+            ))}
+          </Stack>
+        </div>
+        </div>
+        <h2 className="label">설명</h2>
+        <span className="sub"> - 자유롭게 프로젝트에 대한 설명을 작성해주세요.</span>
+        <div className="editor-wrapper">
+          <Editor
+            ref={editorRef}
+            height="400px"
+            initialEditType="markdown"
+            previewStyle="vertical"
+             initialValue={initialContents}
+          />
+          <div className="editor-buttons">
+            <button type="button" onClick={handleRefresh}>초기화</button>
+          </div>
+        </div>  
+      </form>
+    </div>
+  );
+}
+
+export default PostForm;
