@@ -79,7 +79,7 @@ width: 100%;
 }
 
 /* 버튼 스타일 */
-button {
+.form-container button {
   padding: 8px 8px;
   font-size: 16px;
   color: black;
@@ -90,7 +90,7 @@ button {
   transition: background-color 0.2s;
 }
 
-button:hover {
+.form-container button:hover {
    color: #5D5FEF;
 }
 
@@ -125,4 +125,37 @@ button:hover {
 
 .project-type-row .select {
   width: 49%;
+}
+
+#submitBtn {
+  background-color: #5D5FEF;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 5%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#submitBtn:hover {
+  background-color: #4345d8;
+  transform: scale(1.03); 
+}
+
+#cancleBtn {
+  color: black;
+  padding: 10px 20px;
+  margin-top: 5%;
+  background-color: #ddd;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#cancleBtn:hover {
+  background-color: #ccc;
+  transform: scale(1.03);
+}
+
+.btmBtn-container {
+   display: flex;
+  justify-content: flex-end; 
+  gap: 10px; 
+  margin-top: 20px;
 }

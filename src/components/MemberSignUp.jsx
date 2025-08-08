@@ -6,7 +6,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { Chip, TextField, Button, Stack } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-
+import naver from '../assets/naver.png'
+import kakao from '../assets/kakao.png'
 function MemberSignUp() {
   const navigate = useNavigate();
   const [stackInput, setStackInput] = useState("");
@@ -87,8 +88,13 @@ function MemberSignUp() {
   return (
     <div className='auth-container'>
       <h2>회원가입</h2>
-      <p className='subtitle'>회원 정보를 입력해주세요</p>
+      <div className='oauth-container'>
+        <span>소셜로 간편하게 로그인하세요</span>
+          <img src={kakao}/>
+          <img src={naver} style={{width:'34px'}}/>
+      </div>
       <form className='auth-form' onSubmit={handleSubmit(onsubmit)}>
+        <p className='subtitle'>회원 정보를 입력해주세요</p>
         <label htmlFor='name'>이름</label>
         <input {...register("name", { required: "이름을 입력해주세요" })} />
         {errors.nickname && <p className='error'>{errors.nickname.message}</p>}

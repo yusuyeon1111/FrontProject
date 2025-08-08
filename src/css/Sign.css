@@ -220,4 +220,21 @@
   background-color: #0056b3;
 }
 
+.oauth-container {
+ width: 100%;
+  max-width: 420px;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  margin-bottom: 10px;
+  gap: 10px;
+  display: flex;
+}
+
+.oauth-container span{
+  font-size: 1.3rem;
+  margin-right: 17%;
+  font-weight: bold;
+}
 

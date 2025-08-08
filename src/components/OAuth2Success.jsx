@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 const OAuth2Success = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [isNewUser, setIsNewUser] = useState(false);
   const onsubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -34,21 +34,32 @@ const OAuth2Success = () => {
   };
 
       useEffect(() => {
-      const query = new URLSearchParams(location.search);
+       const query = new URLSearchParams(location.search);
       const accessToken = query.get('accessToken');
       const refreshToken = query.get('refreshToken');
-      const username = query.get('username')
-      if (accessToken && refreshToken) {
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("username",username);
-        alert("로그인 완료!");
+      const username = query.get('username');
+      const newUserFlag = query.get('isNewUser');
+
+      if (newUserFlag === 'false') {
+        // 기존 회원 - 토큰 저장 후 바로 홈으로 이동
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('username', username);
+        alert('로그인 완료!');
+        navigate('/');
+      } else if (newUserFlag === 'true') {
+        // 신규 회원 - 추가 정보 등록 폼 보여줌
+        setIsNewUser(true);
       } else {
-        alert("로그인 실패");
-        navigate("/signin");
+        alert('로그인 실패');
+        navigate('/signin');
       }
     }, [location, navigate]);
 
+     if (!isNewUser) {
+    // 신규 회원이 아니면 아무것도 렌더링하지 않음 (또는 로딩 UI)
+    return null;
+    }
 
   return(
     <div className="auth-container" >
