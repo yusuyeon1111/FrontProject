@@ -20,12 +20,18 @@ function Header() {
   }, [])
  
   const toggleMenu = () => {
-      setShowMenu(prev => !prev);
-    };
+    setShowMenu(prev => {
+      if (!prev) setShowEditMenu(false);
+      return !prev;
+    });
+  };
 
   const editMenu = () => {
-    setShowEditMenu(prev => !prev)
-  }
+    setShowEditMenu(prev => {
+      if (!prev) setShowMenu(false);
+      return !prev;
+    });
+  };
 
   const goToLogout = () => {
     try {

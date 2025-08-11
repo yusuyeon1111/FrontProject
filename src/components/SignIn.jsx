@@ -3,10 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../css/Sign.css';
 import axios from 'axios';
 import { useForm } from 'react-hook-form'
-import kakaoLogo from '../assets/kakaoLogo.png'
-import naverLogo from '../assets/naver.png'
 function Signin() {
-
+  
   const nav = useNavigate();
   const {
       register,
@@ -33,7 +31,7 @@ function Signin() {
   }
 
   return (
-     <div className="auth-container">
+     <div className="sign-container">
       <h2>로그인</h2>
       <form className="auth-form" onSubmit={handleSubmit(onsubmit)} noValidate>
         <label htmlFor="username">아이디</label>
@@ -56,7 +54,7 @@ function Signin() {
       </form>
 
       <div className="auth-links">
-        <a href="/signup">회원가입</a>
+        <a href="/membersignup">회원가입</a>
         <a href="/find-id">아이디 찾기</a>
         <a href="/find-pw">비밀번호 찾기</a>
       </div>

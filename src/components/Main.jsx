@@ -1,8 +1,9 @@
 import React from 'react'
 import KakaoMap from './KakaoMap'
+import '../css/Main.css'
 function Main() {
   return (
-    <div>Main
+    <div className='main-container'>Main
     </div>
   )
 }

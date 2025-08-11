@@ -8,7 +8,16 @@
   justify-content: center;
   min-height: 100vh;
   background-color: #f5f7fa;
-  padding: 40px 20px;
+  padding-bottom: 40px;
+}
+
+.sign-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f5f7fa;
 }
 
 .auth-container h2 {
@@ -238,3 +247,73 @@
   font-weight: bold;
 }
 
+#naverImg {
+  width: 34px;
+}
+
+/* 태블릿 이하 */
+@media (max-width: 768px) {
+  .auth-form,
+  .oauth-container {
+    max-width: 90%;
+    padding: 24px 20px;
+  }
+
+  .auth-container h2 {
+    font-size: 24px;
+  }
+
+  .auth-links {
+    gap: 10px;
+  }
+
+  .oauth-buttons {
+    width: 60%;
+  }
+
+  .kakao-login,
+  .naver-login {
+    width: 100%;
+  }
+}
+
+/* 모바일 이하 */
+@media (max-width: 480px) {
+  .auth-container h2 {
+    font-size: 20px;
+  }
+
+  .auth-form {
+    padding: 20px 16px;
+    gap: 10px;
+  }
+
+  .auth-form button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .input-button-group button {
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+  }
+
+  .oauth-buttons {
+    gap: 8px;
+  }
+
+  #idChkBtn {
+    width: 30%;
+  }
+
+  #kakaoImg, #naverImg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .oauth-container span {
+    font-size: 1rem;
+    margin-right: 10%;
+  }
+}

@@ -13,10 +13,9 @@ const regions = [
   '강원도','충청북도','충청남도','전라북도','전라남도','경상북도','경상남도','제주특별자치도',
 ];
 
-function PostView() {
+function StudyView() {
   const { postId } = useParams(); // URL에서 postId 받아오기
   const editorRef = useRef();
-  const [title, setTitle] = useState('');
   const [post, setPost] = useState(null);
   const [type, setType] = useState('online');
   const [region, setRegion] = useState('nothing');
@@ -25,9 +24,6 @@ function PostView() {
   const [showEditMenu, setShowEditMenu] = useState(false)
   const [stackInput, setStackInput] = useState("");
   const [stackList, setStackList] = useState([]);
-  const [positions, setPositions] = useState([
-      { id: Date.now(), role: "backend", count: 1 },
-    ]);
   const navigate = useNavigate();
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
@@ -63,42 +59,16 @@ function PostView() {
   const handleDeleteStack = (stackToDelete) => {
     setStackList(stackList.filter((stack) => stack !== stackToDelete));
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const markdown = editorRef.current.getInstance().getMarkdown();
-
-    const postData = {
-      title,
-      content: markdown,
-      positions: positions,
-      techStacks : stackList,
-      region
-    };
-    try {
-    const response = await axios.post('/api/post/update', postData);
-
-    if (response.status === 200 || response.status === 201) {
-      const postId = response.data;
-      alert('게시글이 등록되었습니다.');
-      navigate(`/post/${postId}`);
-    } else {
-      alert('등록에 실패했습니다.');
-    }
-  } catch (error) {
-    console.error('등록 오류:', error);
-    alert('오류가 발생했습니다. 다시 시도해 주세요.');
-  }
-  };
   
   return (
     <div className="view-container">
+        <p className='category-label'>스터디</p>
       <form className='form'>
         {useUpdate ? <>
-            <p className="post-info"><strong>📌 프로젝트 제목:</strong></p>
-          <input className="post-title-input" id='title' name='title' value={post.title} onChange={(e) => setTitle(e.target.value)}/>
+        <p className="post-info"><strong>📌 스터디 제목:</strong></p>
+          <input className="post-title-input" value={post.title}/>
         <div>
-          <p className="post-info"><strong>🏢 프로젝트 방식:</strong></p>
+          <p className="post-info"><strong>🏢 스터디 방식:</strong></p>
             <div className="project-type-row">
               <select
                 name="projectType"
@@ -121,31 +91,6 @@ function PostView() {
               </select>
             </div>
           </div>
-        <div className="stack-section">
-          <p className="post-info"><strong>🔧 사용 스택 :</strong></p>
-          <span className="sub">- 프론트엔드, 백엔드, 협업 도구 등 어떤 기술과 도구를 사용할 계획인지 적어 주세요.</span>
-          <div className="stack-input">
-            <TextField
-              variant="outlined"
-              size="small"
-              value={stackInput}
-              onChange={(e) => setStackInput(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  handleAddStack();
-                }
-              }}
-              sx={{ flex: 1 }}
-            />
-            <button type="button" onClick={handleAddStack} style={{fontSize:'25px'}} id='graBtn'>+</button>
-          </div>
-          <Stack direction="row" spacing={1} flexWrap="wrap" mt={2}>
-            {stackList.map((stack, i) => (
-              <Chip key={i} label={stack} onDelete={() => handleDeleteStack(stack)} color="primary" />
-            ))}
-          </Stack>
-        </div>
         <h3 className="post-section-title">✔️ 설명</h3>
         <div className="editor-wrapper">
           <Editor
@@ -163,34 +108,24 @@ function PostView() {
         </>
         :
         <>
-        <div className='view-top-container'>
-          <p className='category-label'>프로젝트</p>
-
-          <div className='view-top'>
-            <h2 className="post-title">{post.title}</h2>
-            {!useUpdate && post.author === username && (
-              <div className='setting-wrapper'>
-                <IoSettingsSharp id='settingIcon' onClick={editMenu} />
-                {showEditMenu && (
+            <div className='view-top'>
+              <h2 className="post-title">{post.title}</h2>
+              <div style={{ position: 'relative' }}>
+                {!useUpdate ? 
+                <>
+                  <IoSettingsSharp id='settingIcon' onClick={editMenu} />
+                  {showEditMenu && (
                   <div className='view-menu'>
                     <p onClick={() => setUseUpdate(true)}>수정</p>
                     <p onClick={() => navigate("/studyform")}>삭제</p>
                   </div>
                 )}
+                </>
+                :<></>}
               </div>
-            )}
-          </div>
-
-          <span className="post-info">{post.nickname}</span>
-        </div>
-
-            {post.author !== username && (
-              <div className="apply-container">
-                <p className="post-info"><strong>🔧 포지션 신청 </strong></p>
-                <button className="apply-btn">포지션 신청하기</button>
-              </div>
-            )}
-            <p className="post-info"><strong>🏢 프로젝트 방식:</strong> 
+            </div>
+            <p className="post-info"><strong>👤 작성자:</strong> {post.nickname}</p>
+            <p className="post-info"><strong>🏢 스터디 방식:</strong> 
               {post.projectType === "online" && '온라인으로 진행합니다.'}
               {post.projectType === "offline" && '오프라인으로 진행합니다.'}
               {post.projectType === "both" && '온라인과 오프라인 모두 가능합니다.'}
@@ -217,4 +152,4 @@ function PostView() {
   );
 }
 
-export default PostView;
+export default StudyView;

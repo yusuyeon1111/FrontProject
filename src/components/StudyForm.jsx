@@ -60,7 +60,6 @@ function PostForm() {
       category:'study',
       author:username
     };
-    console.log(postData)
     try {
     const response = await axios.post('/api/post/create', postData);
 
@@ -121,7 +120,7 @@ function PostForm() {
           <Editor
             ref={editorRef}
             height="400px"
-            initialEditType="markdown"
+            initialEditType="wysiwyg"
             previewStyle="vertical"
              initialValue={initialContents}
           />

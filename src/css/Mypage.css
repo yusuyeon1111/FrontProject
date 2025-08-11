@@ -1,15 +1,16 @@
 /* 마이페이지 전체 컨테이너 */
 .mypage-container {
-  background-color: #fff;
+  background-color: #F9FAFB;
   font-family: 'Pretendard', sans-serif;
   color: #2C2C2C;
+  padding: 40px 0px;
 }
 
 /* 상단 제목 */
 .top {
   font-size: 28px;
   font-weight: bold;
-  color: #5D5FEF;
+  color: #007bff;
   margin-bottom: 30px;
 }
 
@@ -18,7 +19,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   background-color: #fff;
-  width: 70%;
+  width: 65%;
   margin: 10px;
 }
 
@@ -40,20 +41,20 @@
 
 /* 선택된 탭 스타일 */
 .Mui-selected {
-  color: #5D5FEF !important;
+  color: #0056b3  !important;
   font-weight: 700;
 }
 
 /* 선택된 탭 밑줄 */
 .MuiTabs-indicator {
-  background-color: #5D5FEF !important;
+  background-color: #0056b3  !important;
   height: 3px;
   border-radius: 2px;
 }
 
 /* 마이페이지 내 정보 카드 */
 .myInfo-container {
-  width: 25%;
+  width: 30%;
   margin: 10px;
   background-color: #ffffff;
   border: 1px solid #d1d5db;
@@ -74,13 +75,13 @@
 .nickname {
   font-size: 24px;
   font-weight: bold;
-  color: #3E3A61;
+  color: #0056b3 ;
   font-family: 'Pretendard', sans-serif;
 }
 
 /* 역할 배지 */
 .role-badge {
-  background-color: #3E3A61;
+  background-color: #007bff ;
   color: white;
   padding: 4px 10px;
   border-radius: 12px;
@@ -93,7 +94,7 @@
   border-radius: 12px;
   background-color: #F4F5F7;
   padding: 16px;
-  font-size: 15px;
+  font-size: 1rem;
   color: #4C4C4C;
   margin-bottom: 16px;
   line-height: 1.6;
@@ -118,10 +119,8 @@
 }
 
 .mypage-inner {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 20px;
   flex-wrap: wrap;
 }
 
@@ -134,35 +133,30 @@
 /* 프로필 추가 정보 (신청내역, 참여중 등) */
 .profile-info {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 40px;
   text-align: center;
   border-top: 1px solid #E5E7EB;
-  gap: 12px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 0 10px 10px;
 }
 
 .profile-info > div {
-  flex: 1 1 20%;
-  min-width: 50px;
-  max-width: 90px;
+  flex: none;
+  width: 70px;
   background-color: #fff;
   border-radius: 8px;
   cursor: default;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
   user-select: none;
-}
-
-.profile-info > div:not(:last-child) {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   position: relative;
 }
 
+/* 구분선 제거 또는 위치 조정 */
 .profile-info > div:not(:last-child)::after {
   content: "";
   position: absolute;
   top: 50%;
-  right: -6px;
+  right: -20px; /* 구분선 간격 넓힘 */
   width: 1px;
   height: 60%;
   background-color: #D1D5DB;
@@ -185,7 +179,7 @@
 
 #editIcon {
   font-size: 25px;
-  margin-left: 55%;
+  margin-left: 10%;
 }
 
 .modal-stack {
@@ -202,24 +196,43 @@
 }
 
 .modal-stack button:hover {
-  color: #5D5FEF;
+  color: #0056b3 ;
 }
 
 /* 반응형: 태블릿 이하 */
 @media (max-width: 1024px) {
-  .profile-info > div {
-    flex: 1 1 40%;
+  .myAct-container {
+    width: 60%;
+  }
+  .myInfo-container {
+    width: 30%;
   }
 }
 
 /* 반응형: 모바일 */
 @media (max-width: 768px) {
-  .profile-info {
-    flex-direction: column;
+  .mypage-inner {
+    display: flex;
     align-items: center;
+    justify-content: center;
   }
-
+  .profile-info {
+    display: flex;
+  }
+  .myInfo-container {
+    width: 80%;
+  }
+   .myAct-container {
+    width: 80%;
+  }
+ 
   .profile-info > div {
     width: 90%;
+    max-width: none; /* max-width 제한 해제 */
+  }
+
+  /* 구분선 제거 (세로 정렬이므로 가로 구분선 필요 없음) */
+  .profile-info > div:not(:last-child)::after {
+    content: none;
   }
 }

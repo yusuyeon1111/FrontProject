@@ -14,6 +14,7 @@ import Main from './components/Main';
 import PostForm from './components/PostForm';
 import StudyForm from './components/StudyForm';
 import PostView from './components/PostView';
+import StudyView from './components/StudyView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
         <Route path='/post' element={<Post/>}/>
         <Route path='/postform' element={<PostForm/>}/>
         <Route path="/post/:postId" element={<PostView/>}/>
+        <Route path="/study/:postId" element={<StudyView/>}/>
         <Route path='studyform' element={<StudyForm/>}/>
       </Route>
       <Route path="/signin" element={<SignIn/>}/>

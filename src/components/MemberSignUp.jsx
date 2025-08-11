@@ -90,8 +90,8 @@ function MemberSignUp() {
       <h2>회원가입</h2>
       <div className='oauth-container'>
         <span>소셜로 간편하게 로그인하세요</span>
-          <img src={kakao}/>
-          <img src={naver} style={{width:'34px'}}/>
+          <img src={kakao} id='kakaoImg'/>
+          <img src={naver} id='naverImg'/>
       </div>
       <form className='auth-form' onSubmit={handleSubmit(onsubmit)}>
         <p className='subtitle'>회원 정보를 입력해주세요</p>
@@ -106,7 +106,7 @@ function MemberSignUp() {
         <label htmlFor='username'>아이디</label>
         <div className="input-button-group">
           <input {...register("username", { required: "아이디를 입력해주세요" })} />
-          <button type="button" onClick={() => idCheck()}>중복체크</button>
+          <button type="button" onClick={() => idCheck()} id='idChkBtn'>중복체크</button>
         </div>
         {errors.username && <p className='error'>{errors.username.message}</p>}
 

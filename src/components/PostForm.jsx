@@ -57,10 +57,15 @@ function PostForm() {
   const [type, setType] = useState('online');
   const [region, setRegion] = useState('nothing');
   const username = localStorage.getItem("username")
+  const [showEditor, setShowEditor] = useState(false);
   const [positions, setPositions] = useState([
     { id: Date.now(), role: "backend", count: 1 },
   ]);
-  
+
+  useEffect(() => {
+    setTimeout(() => setShowEditor(true), 0);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -76,7 +81,6 @@ function PostForm() {
       category:'project',
       author:username
     };
-    console.log(postData)
     try {
     const response = await axios.post('/api/post/create', postData);
 
@@ -178,17 +182,18 @@ function PostForm() {
                 <option value="etc">기타</option>
               </select>
               <input
+                id='count'
                 type="number"
                 className="input small"
                 min="1"
                 value={pos.count}
                 onChange={(e) => handleChange(pos.id, "count", e.target.value)}
               />
-              <button type="button" onClick={handleAdd}>
+              <button type="button" onClick={handleAdd} id='graBtn'>
                 추가
               </button>
               {positions.length > 1 && (
-                <button type="button" onClick={() => handleRemove(pos.id)}>
+                <button type="button" onClick={() => handleRemove(pos.id)} id='graBtn'>
                   삭제
                 </button>
               )}
@@ -212,7 +217,7 @@ function PostForm() {
               }}
               sx={{ flex: 1 }}
             />
-            <button type="button" onClick={handleAddStack} style={{fontSize:'30px'}}>+</button>
+            <button type="button" onClick={handleAddStack} style={{fontSize:'25px'}} id='graBtn'>+</button>
           </div>
           <Stack direction="row" spacing={1} flexWrap="wrap" mt={2}>
             {stackList.map((stack, i) => (
@@ -221,18 +226,18 @@ function PostForm() {
           </Stack>
         </div>
         </div>
-        <h2 className="label">설명</h2>
+        <span className="label">설명</span>
         <span className="sub"> - 자유롭게 프로젝트에 대한 설명을 작성해주세요.</span>
         <div className="editor-wrapper">
           <Editor
             ref={editorRef}
             height="400px"
-            initialEditType="markdown"
+            initialEditType="wysiwyg"
             previewStyle="vertical"
              initialValue={initialContents}
           />
           <div className="editor-buttons">
-            <button type="button" onClick={handleRefresh}>초기화</button>
+            <button type="button" onClick={handleRefresh} id='submitBtn'>초기화</button>
           </div>
         </div> 
         <div className='btmBtn-container'>
