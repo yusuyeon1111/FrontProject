@@ -46,10 +46,32 @@ function PostForm() {
   const [type, setType] = useState('online');
   const [region, setRegion] = useState('nothing');
   const username = localStorage.getItem("username")
-  
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const today = new Date().toISOString().split('T')[0];
+  const [positions, setPositions] = useState([
+      { id: Date.now(), role: "totalCount", count: 1 },
+    ]);
   const handleSubmit = async (e) => {
+    let postStatus = "";
     e.preventDefault();
-
+    if (!startDate || !endDate) {
+      alert('시작일과 마감일을 모두 선택해주세요.');
+      return;
+    }
+      if (startDate < today) {
+      alert("시작일은 오늘 이후로 설정해주세요.");
+      return;
+    }
+    if (endDate && endDate < startDate) {
+      alert("마감일은 시작일 이후로 설정해주세요.");
+      return;
+    }
+    if(startDate == today) {
+      postStatus = "IN_PROGRESS"
+    } else {
+      postStatus = "SCHEDULED"
+    }
     const markdown = editorRef.current.getInstance().getMarkdown();
 
     const postData = {
@@ -58,7 +80,12 @@ function PostForm() {
       region,
       projectType:type,
       category:'study',
-      author:username
+      author:username,
+      positions: positions,
+      startDate,
+      endDate,
+      postStatus:postStatus,
+      status:'ING'
     };
     try {
     const response = await axios.post('/api/post/create', postData);
@@ -81,6 +108,14 @@ function PostForm() {
     editorRef.current.getInstance().setMarkdown(refreshContents);
   };
 
+  const handleChange = (id, field, value) => {
+    setPositions(
+      positions.map((pos) =>
+        pos.id === id ? { ...pos, [field]: value } : pos
+      )
+    );
+  };
+
   return (
    <div className="form-container">
       <form className="form" onSubmit={handleSubmit}>
@@ -89,6 +124,32 @@ function PostForm() {
           <span className="label">스터디명</span>
           <input name="title" className="input" value={title}  onChange={(e) => setTitle(e.target.value)}/>
         </label>
+        <div className="date-section">
+                  <label>
+                    <span className="label">시작일</span>
+                    <TextField
+                      type="date"
+                      size="small"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      className="input"
+                      InputLabelProps={{ shrink: true }}
+                      inputProps={{ min: today }} // 오늘 이전 선택 불가
+                    />
+                  </label>
+                  <label style={{ marginLeft: '10px' }}>
+                    <span className="label">마감일</span>
+                    <TextField
+                      type="date"
+                      size="small"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      className="input"
+                      InputLabelProps={{ shrink: true }}
+                      inputProps={{ min: startDate || today }} // 시작일 이전 선택 불가
+                    />
+                  </label>
+                </div>
         <div>
           <span className="label">스터디 방식</span>
             <div className="project-type-row">
@@ -108,13 +169,36 @@ function PostForm() {
                 onChange={(e) => setRegion(e.target.value)}
                 className="select"
               >
-                <option value="nothing">상관없음</option>
+                <option value="nothing">지역무관</option>
                 {type !== 'online' && regions.map((r) => <option key={r}>{r}</option>)}
               </select>
             </div>
           </div>
         </div>
-        <h2 className="label">설명</h2>
+        <div className='memberLabel'>
+        <span className="label" style={{marginTop:'30px'}}>모집인원</span>
+         {positions.map((pos) => (
+            <label className="row" key={pos.id}>
+              <select
+                name="position"
+                className="select"
+                value={pos.role}
+                onChange={(e) => handleChange(pos.id, "role", e.target.value)}
+              >
+                <option value="totalCount">총 인원수</option>
+              </select>
+              <input
+                id='count'
+                type="number"
+                className="input small"
+                min="1"
+                value={pos.count}
+                onChange={(e) => handleChange(pos.id, "count", e.target.value)}
+              />
+            </label>
+          ))}
+        </div>
+        <h2 className="label" style={{marginTop:'30px'}}>설명</h2>
         <span className="sub"> - 자유롭게 스터디에 대한 설명을 작성해주세요.</span>
         <div className="editor-wrapper">
           <Editor

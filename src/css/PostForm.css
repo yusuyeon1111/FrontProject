@@ -44,7 +44,7 @@
 .input.small {
   flex: 1; /* select보다 좁게 */
   min-width: 60px;
-  padding: 10px;
+  padding: 11px;
   font-size: 14px;
 }
 
@@ -83,7 +83,7 @@ width: 100%;
 .stack-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .stack-input {
@@ -105,6 +105,7 @@ width: 100%;
   gap: 10px;
   flex-wrap: nowrap; 
   width: 100%;
+  margin-top: 5px;
 }
 
 .project-type-row {
@@ -130,4 +131,8 @@ width: 100%;
 .memberLabel #graBtn {
   flex: 0;
   white-space: nowrap;
+}
+
+.css-1nh9prl-MuiStack-root {
+  margin-top: 5px;
 }

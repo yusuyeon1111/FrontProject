@@ -34,11 +34,13 @@ const OAuth2Success = () => {
   };
 
       useEffect(() => {
+        
        const query = new URLSearchParams(location.search);
       const accessToken = query.get('accessToken');
       const refreshToken = query.get('refreshToken');
       const username = query.get('username');
       const newUserFlag = query.get('isNewUser');
+      console.log(newUserFlag)
 
       if (newUserFlag === 'false') {
         // 기존 회원 - 토큰 저장 후 바로 홈으로 이동

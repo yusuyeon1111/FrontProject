@@ -15,6 +15,8 @@ import PostForm from './components/PostForm';
 import StudyForm from './components/StudyForm';
 import PostView from './components/PostView';
 import StudyView from './components/StudyView';
+import LoginRequiredModal from './components/LoginRequiredModal';
+import ApplyMemberModal from './components/ApplyMemberModal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -32,6 +34,8 @@ root.render(
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/membersignup" element={<MemberSignUp/>}/>
       <Route path="/oauth2/success" element={<OAuth2Success/>}/>
+      <Route path="/loginRequiredModal" element={<LoginRequiredModal/>}/>
+      <Route path="/applyMemberModal" element={<ApplyMemberModal/>}/>
     </Routes>
   </BrowserRouter>
 );

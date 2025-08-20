@@ -12,35 +12,66 @@ function MemberSignUp() {
   const navigate = useNavigate();
   const [stackInput, setStackInput] = useState("");
   const [stackList, setStackList] = useState([]);
-
+  // 중복 체크 상태
+  const [isIdChecked, setIsIdChecked] = useState(false);
+  const [isEmailChecked, setIsEmailChecked] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
     formState:{errors},
   }= useForm();
+  
+  const username = watch("username");
+  const email = watch("email");
 
   const idCheck = async () => {
+    if (!username) {
+      alert("아이디를 입력해주세요");
+      return;
+    }
     try {
-      const username = watch("username"); // react-hook-form에서 입력값 가져오기
-      if (!username) {
-        alert("아이디를 입력해주세요");
-        return;
-      }
-      const response = await axios.get("/api/member/idCheck", {
-        params: { username }  
-      });
-      alert(response.data); 
-    } catch (error) {
-      if (error.response) {
-        alert(error.response.data); 
+      const response = await axios.get("/api/member/idCheck", { params: { username } });
+      alert(response.data);
+      if (response.data === "사용 가능한 아이디입니다.") {
+        setIsIdChecked(true); 
       } else {
-        alert("네트워크 에러");
+        setIsIdChecked(false);
       }
+    } catch (error) {
+      console.error(error);
+      setIsIdChecked(false);
+    }
+  };
+
+  const emlCheck = async () => {
+    if (!email) {
+      alert("이메일을 입력해주세요");
+      return;
+    }
+    try {
+      const response = await axios.get("/api/member/emlCheck", { params: { email } });
+      alert(response.data);
+      if (response.data === "사용 가능한 이메일입니다.") {
+        setIsEmailChecked(true); 
+      } else {
+        setIsEmailChecked(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsEmailChecked(false);
     }
   };
 
   const onsubmit = async (data) => {
+    if (!isIdChecked) {
+      alert("아이디 중복 체크를 먼저 해주세요.");
+      return;
+    }
+    if (!isEmailChecked) {
+      alert("이메일 중복 체크를 먼저 해주세요.");
+      return;
+    }
     try {
         const payload = {
           ...data,
@@ -111,7 +142,10 @@ function MemberSignUp() {
         {errors.username && <p className='error'>{errors.username.message}</p>}
 
         <label htmlFor='email'>이메일</label>
+        <div className="input-button-group">
         <input type='email' {...register("email", emailRules)} />
+        <button type="button" onClick={() => emlCheck()} id='emkChkBtn'>중복체크</button>
+        </div>
         {errors.email && <p className='error'>{errors.email.message}</p>}
 
         <label htmlFor='password'>비밀번호</label>

@@ -4,23 +4,23 @@
   font-family: 'Pretendard', sans-serif;
   color: #2C2C2C;
   padding: 40px 0px;
+  min-height: 100vh;
 }
 
 /* 상단 제목 */
 .top {
-  font-size: 28px;
+  font-size: clamp(22px, 2.5vw + 12px, 30px);
   font-weight: bold;
   color: #007bff;
   margin-bottom: 30px;
 }
 
 .myAct-container {
-  border: 1px solid #d1d5db;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   background-color: #fff;
-  width: 65%;
+  width: 70%;
   margin: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 /* 탭 전체 컨테이너 */
@@ -34,7 +34,7 @@
 .MuiTab-root {
   color: #777;
   font-weight: 500;
-  font-size: 16px;
+  font-size: clamp(12px, 2vw + 10px, 16px);
   font-family: 'Pretendard', sans-serif;
   transition: color 0.3s ease, font-weight 0.3s ease;
 }
@@ -54,13 +54,14 @@
 
 /* 마이페이지 내 정보 카드 */
 .myInfo-container {
-  width: 30%;
+  width: 70%;
   margin: 10px;
+  padding: 20px 60px;
+  box-sizing: border-box;
   background-color: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 15px;
   margin-bottom: 24px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 /* 프로필 헤더: 닉네임 + 역할 */
@@ -68,12 +69,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 /* 닉네임 스타일 */
 .nickname {
-  font-size: 24px;
+  font-size: clamp(20px, 2.5vw + 12px, 26px);
   font-weight: bold;
   color: #0056b3 ;
   font-family: 'Pretendard', sans-serif;
@@ -81,23 +82,24 @@
 
 /* 역할 배지 */
 .role-badge {
-  background-color: #007bff ;
+  background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: clamp(12px, 2vw + 10px, 14px);
+  font-weight: 600;
 }
 
 /* 소개 텍스트 */
 .intro-text {
   border-radius: 12px;
-  background-color: #F4F5F7;
-  padding: 16px;
-  font-size: 1rem;
-  color: #4C4C4C;
-  margin-bottom: 16px;
+  background-color: #f9fafb;
+  padding: 18px;
+  font-size: clamp(13px, 2vw + 11px, 16px);
+  color: #444;
+  margin-bottom: 20px;
   line-height: 1.6;
+  border: 1px solid #eee;
 }
 
 /* 기술 스택 컨테이너 */
@@ -109,13 +111,19 @@
 
 /* 기술 스택 Pill */
 .stack-pill {
-  background-color: #E6E8EB;
-  color: #444;
-  border-radius: 999px;
+  background-color: #f1f3f5;
+  color: #333;
+  border-radius: 20px;
   padding: 6px 14px;
-  font-size: 14px;
+  font-size: clamp(12px, 2vw + 11px, 14px);
   font-weight: 500;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+}
+
+.stack-pill:hover {
+  background-color: #007bff;
+  color: white;
 }
 
 .mypage-inner {
@@ -132,55 +140,41 @@
 
 /* 프로필 추가 정보 (신청내역, 참여중 등) */
 .profile-info {
+  padding: 10px 30px;
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  text-align: center;
-  border-top: 1px solid #E5E7EB;
-  margin: 0 10px 10px;
+  justify-content: space-around;
+  margin-top: 20px;
+  border-top: 1px solid #eee;
 }
 
-.profile-info > div {
-  flex: none;
-  width: 70px;
-  background-color: #fff;
-  border-radius: 8px;
-  cursor: default;
-  user-select: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  position: relative;
+.profile-info div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-/* 구분선 제거 또는 위치 조정 */
-.profile-info > div:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -20px; /* 구분선 간격 넓힘 */
-  width: 1px;
-  height: 60%;
-  background-color: #D1D5DB;
-  transform: translateY(-50%);
+.profile-info span:first-child {
+  margin-top: 10px;
+  font-size: clamp(14px, 2vw + 12px, 17px);
+  color: #666;
 }
 
-.profile-info p:first-child {
-  margin-top: 30px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #6B7280;
-  margin-bottom: 6px;
-}
-
-.profile-info p:last-child {
-  font-size: 20px;
+.profile-info span:last-child {
+  font-size: clamp(14px, 2vw + 12px, 17px);
   font-weight: 700;
-  color: #3E3A61;
+  color: #222;
 }
+
 
 #editIcon {
-  font-size: 25px;
-  margin-left: 10%;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  justify-content: right;
 }
+
+#editIcon > span {font-weight: 600;}
 
 .modal-stack {
   margin-top: 15px;
@@ -190,7 +184,7 @@
   background: white;
   margin-left: 5px;
   border: none;
-  font-size: 28px;
+  font-size: clamp(26px, 2.5vw + 12px, 30px);
   margin-top: 4px;
   color: #777;
 }
@@ -199,14 +193,117 @@
   color: #0056b3 ;
 }
 
+#projectlabel {
+  color: rgb(223, 95, 137);
+  background-color: pink;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-right: 10px;
+  font-size: clamp(12px, 2vw + 10px, 14px);
+}
+
+#studylabel {
+  color: #17a2b8;
+  background-color: paleturquoise;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-right: 10px;
+  font-size: clamp(12px, 2vw + 10px, 14px);
+}
+
+.myTitle {
+  font-size: clamp(16px, 2vw + 12px, 18px);
+  font-weight: 600;
+}
+.status {font-size: clamp(14px, 2vw + 11px, 16px); margin-left: 10px; font-weight: 500; color: #444;}
+.line { color:grey;}
+.myDate, .line {
+  font-size: clamp(13px, 2vw + 10px, 15px);
+}
+
+.postData-container {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.dataInner {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.postItem{
+   padding: 13px 0;
+}
+
+.like {
+  margin-left: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.status-pending {
+  color: #d97706; /* 주황색 */
+}
+
+.status-accepted {
+  color: #16a34a; /* 초록색 */
+}
+
+.status-rejected {
+  color: #b91c1c; /* 빨강색 */
+}
+
+.status-unknown {
+  color: #374151; /* 회색 */
+}
+
+.status {
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-left: 8px;
+}
+
+/* 모집중: 초록색 배지 */
+.status[data-type="active"] {
+  color: #16a34a; /* 진한 초록 */
+}
+
+/* 모집완료: 회색 배지 */
+.status[data-type="end"] {
+  color: #6b7280; /* 회색 글씨 */
+  background-color: #e5e7eb; /* 연한 회색 배경 */
+}
+
+.postItemTop {
+  padding: 0 30px;
+  display: flex;
+  border-bottom: 1px solid #e0e0e0; 
+  align-items: center;
+  justify-content: space-between;
+}
+
+#applyMngBtn {
+  border: none;
+  background-color: white;
+}
+
 /* 반응형: 태블릿 이하 */
-@media (max-width: 1024px) {
-  .myAct-container {
-    width: 60%;
-  }
-  .myInfo-container {
-    width: 30%;
-  }
+@media (max-width: 1080px) {
+  .mypage-container{padding: 10px;}
+  .myInfo-container{width: 100%;}
+  .myAct-container{width: 100%;}
+}
+@media (max-width: 785px) {
+  .postItemTop{display: block; padding-bottom: 8px;}
+  .postItem{padding: 0;}
 }
 
 /* 반응형: 모바일 */
@@ -216,23 +313,16 @@
     align-items: center;
     justify-content: center;
   }
-  .profile-info {
-    display: flex;
-  }
+  .profile-info {display: flex;}
   .myInfo-container {
-    width: 80%;
+    padding: 10px 0;
+    width: 100%;
   }
-   .myAct-container {
-    width: 80%;
-  }
- 
+   .myAct-container { width: 100%;}
   .profile-info > div {
     width: 90%;
     max-width: none; /* max-width 제한 해제 */
   }
-
-  /* 구분선 제거 (세로 정렬이므로 가로 구분선 필요 없음) */
-  .profile-info > div:not(:last-child)::after {
-    content: none;
-  }
+  .mypage-container{padding: 0;}
+  .postItemTop{padding: 10px 10px;}
 }

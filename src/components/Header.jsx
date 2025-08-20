@@ -38,6 +38,7 @@ function Header() {
     axios.post("/api/member/logout", null, {
           headers: { Authorization: `Bearer ${accessToken}` }, 
         });
+    localStorage.removeItem("username");  
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     alert("로그아웃 되었습니다.");
